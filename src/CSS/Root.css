@@ -1,0 +1,31 @@
+.banner-bg {
+  background-image: url("../Images/slider-bg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.more-banner-bg {
+  background-image: url("../Images/map_line.png");
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.banner-user {
+  background-image: url("../Images/about.jpg");
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.banner-user:before {
+  content: "";
+  height: 100%;
+  width: 100%;
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+  border-radius: 8px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+}

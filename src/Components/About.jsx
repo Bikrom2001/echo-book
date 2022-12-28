@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../Context/UserContext";
 
 const About = () => {
+
+  const {user} = useContext(AuthContext);
+
   return (
     <div className="bg-[#EFF4FB]">
       <div className="banner-user">
@@ -10,7 +14,7 @@ const About = () => {
             <div className="max-w-md p-8 sm:flex sm:space-x-6">
               <div className="flex-shrink-0 w-full mb-6 h-48 sm:h-32 sm:w-32 sm:mb-0">
                 <img
-                  src="https://source.unsplash.com/100x100/?portrait?1"
+                  src={user?.photoURL}
                   alt=""
                   className="object-cover object-center w-full h-full rounded-full dark:bg-gray-500"
                 />
@@ -18,7 +22,7 @@ const About = () => {
               <div className="flex flex-col space-y-4">
                 <div className="text-left">
                   <h2 className="text-2xl font-bold text-white">
-                    Rebeca Powel
+                    {user?.displayName}
                   </h2>
                   <span className="text-sm dark:text-gray-200">
                     United State of America
@@ -106,12 +110,14 @@ const About = () => {
               </div>
               <div className="flex items-center mt-7 mb-2 justify-between">
                 <h2 className="font-bold text-xl">Name :</h2>
-                <p className="font-semibold text-gray-400">Rebeca Powel</p>
+                <p className="font-semibold text-gray-400">
+                  {user?.displayName}
+                </p>
               </div>
               <hr />
               <div className="flex items-center mt-5 mb-2 justify-between">
                 <h2 className="font-bold text-xl">Email :</h2>
-                <p className="font-semibold text-gray-400">info@example.com</p>
+                <p className="font-semibold text-gray-400">{user?.email}</p>
               </div>
               <hr />
 

@@ -1,8 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../Context/UserContext";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { logOut, user } = useContext(AuthContext);
+
+  const handleLogout = () => {
+    logOut()
+      .then(() => {})
+      .catch((error) => console.error(error));
+  };
 
   return (
     <div className="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
@@ -48,35 +56,60 @@ const Header = () => {
               <p> About </p>
             </Link>
           </li>
-          <li>
-            <Link
-              to="/logout"
-              aria-label="LogOut"
-              title="LogOut"
-              className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
-            >
-              LogOut
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/profile"
-              aria-label="Profile"
-              title="Profile"
-              className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
-            >
-              <div className="avatar online">
-                <div className="w-8 h-8 rounded-full">
-                  <img src="https://placeimg.com/192/192/people" alt="" />
-                </div>
-              </div>
-              {/* <div className="avatar offline">
-                <div className="w-24 rounded-full">
-                  <img src="https://placeimg.com/192/192/people" />
-                </div>
-              </div> */}
-            </Link>
-          </li>
+          {user?.email ? (
+            <>
+              <li>
+                <Link
+                  to="/login"
+                  onClick={handleLogout}
+                  aria-label="LogOut"
+                  title="LogOut"
+                  className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                >
+                  LogOut
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/about"
+                  aria-label="Profile"
+                  title="Profile"
+                  className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                >
+                  {user?.photoURL ? (
+                    <div className="avatar online">
+                      <div className="w-8 h-8 rounded-full">
+                        <img src={user?.photoURL} alt="" />
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="avatar online">
+                      <div className="w-8 h-8 rounded-full">
+                        <img
+                          src="https://www.shutterstock.com/image-vector/man-character-face-avatar-glasses-260nw-562077406.jpg"
+                          alt=""
+                        />
+                      </div>
+                    </div>
+                  )}
+                </Link>
+              </li>
+            </>
+          ) : (
+            <>
+              <li>
+                <Link
+                  to="/login"
+                  onClick={handleLogout}
+                  aria-label="LogOut"
+                  title="LogOut"
+                  className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                >
+                  LogIn
+                </Link>
+              </li>
+            </>
+          )}
         </ul>
         <div className="lg:hidden">
           <button
@@ -101,7 +134,7 @@ const Header = () => {
             </svg>
           </button>
           {isMenuOpen && (
-            <div className="absolute top-0 left-0 w-full">
+            <div className="absolute top-0 left-0 w-full z-10">
               <div className="p-5 bg-white border rounded shadow-sm">
                 <div className="flex items-center justify-between mb-4">
                   <div>
@@ -164,38 +197,60 @@ const Header = () => {
                         <p> About </p>
                       </Link>
                     </li>
-                    <li>
-                      <Link
-                        to="/logout"
-                        aria-label="LogOut"
-                        title="LogOut"
-                        className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
-                      >
-                        LogOut
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        to="/profile"
-                        aria-label="Profile"
-                        title="Profile"
-                        className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
-                      >
-                        <div className="avatar online">
-                          <div className="w-8 h-8 rounded-full">
-                            <img
-                              src="https://placeimg.com/192/192/people"
-                              alt=""
-                            />
-                          </div>
-                        </div>
-                        {/* <div className="avatar offline">
-                <div className="w-24 rounded-full">
-                  <img src="https://placeimg.com/192/192/people" />
-                </div>
-              </div> */}
-                      </Link>
-                    </li>
+                    {user?.email ? (
+                      <>
+                        <li>
+                          <Link
+                            to="/login"
+                            onClick={handleLogout}
+                            aria-label="LogOut"
+                            title="LogOut"
+                            className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                          >
+                            LogOut
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            to="/about"
+                            aria-label="Profile"
+                            title="Profile"
+                            className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                          >
+                            {user?.photoURL ? (
+                              <div className="avatar online">
+                                <div className="w-8 h-8 rounded-full">
+                                  <img src={user?.photoURL} alt="" />
+                                </div>
+                              </div>
+                            ) : (
+                              <div className="avatar online">
+                                <div className="w-8 h-8 rounded-full">
+                                  <img
+                                    src="https://www.shutterstock.com/image-vector/man-character-face-avatar-glasses-260nw-562077406.jpg"
+                                    alt=""
+                                  />
+                                </div>
+                              </div>
+                            )}
+                          </Link>
+                        </li>
+                      </>
+                    ) : (
+                      <>
+                        <li>
+                          <Link
+                            to="/login"
+                            onClick={handleLogout}
+                            aria-label="LogOut"
+                            title="LogOut"
+                            className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                          >
+                            LogIn
+                          </Link>
+                        </li>
+                      </>
+                    )}
                   </ul>
                 </nav>
               </div>

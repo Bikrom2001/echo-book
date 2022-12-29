@@ -3,6 +3,7 @@ import About from "../Components/About";
 import ErrorPage from "../Components/ErrorPage";
 import Login from "../Components/Login";
 import Media from "../Components/Media";
+import MediaDetails from "../Components/MediaDetails";
 import Registration from "../Components/Registration";
 import Main from "../Layout/Main";
 import Home from "../Pages/Home/Home";
@@ -19,19 +20,25 @@ const router = createBrowserRouter([
       },
       {
         path: "/media",
-        element: <Media></Media>
+        element: <Media></Media>,
       },
       {
         path: "/login",
-        element: <Login></Login>
+        element: <Login></Login>,
       },
       {
         path: "/register",
-        element: <Registration></Registration>
+        element: <Registration></Registration>,
       },
       {
         path: "/about",
-        element: <About></About>
+        element: <About></About>,
+      },
+      {
+        path: "/mediaDetails/:id",
+        element: <MediaDetails></MediaDetails>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/mediaDetails/${params.id}`),
       },
     ],
   },

@@ -9,6 +9,8 @@ const Registration = () => {
     useContext(AuthContext);
   const [error, setError] = useState("");
 
+
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -25,6 +27,7 @@ const Registration = () => {
         handleUpdateUserProfile(name, photoURL);
         setError("");
         toast.success("Sign Up Your Account");
+
       })
       .catch((error) => {
         console.error(error);
@@ -39,7 +42,9 @@ const Registration = () => {
       photoURL: photoURL,
     };
     updateUserProfile(profile)
-      .then(() => {})
+      .then(() => {
+        
+      })
       .catch((error) => console.error(error));
   };
 
@@ -48,9 +53,11 @@ const Registration = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
+        
       })
       .catch((error) => console.error(error));
   };
+
 
   return (
     <div className="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 lg:max-w-4xl">

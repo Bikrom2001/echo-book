@@ -38,7 +38,9 @@ const router = createBrowserRouter([
         path: "/mediaDetails/:id",
         element: <MediaDetails></MediaDetails>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/mediaDetails/${params.id}`),
+          fetch(
+            `https://echo-book-server.vercel.app/mediaDetails/${params.id}`
+          ),
       },
     ],
   },

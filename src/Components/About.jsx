@@ -8,7 +8,7 @@ const About = () => {
   const [abouteUser, SetAbouteUser] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/userinfo`)
+    fetch(`https://echo-book-server.vercel.app/userinfo`)
       .then((res) => res.json())
       .then((data) => SetAbouteUser(data));
   }, []);

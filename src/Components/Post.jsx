@@ -29,7 +29,7 @@ const Post = () => {
             description: data.description,
             image: imgData.data.url,
           };
-          fetch(`http://localhost:5000/post`, {
+          fetch(`https://echo-book-server.vercel.app/post`, {
             method: "POST",
             headers: {
               "content-type": "application/json",

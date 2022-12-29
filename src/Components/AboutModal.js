@@ -10,21 +10,20 @@ const AboutModal = ({ aboutinfo }) => {
   const { user } = useContext(AuthContext);
 
   const updateAbout = () => {
-
-     fetch(`http://localhost:5000/updateAboute/${aboutinfo._id}`, {
-       method: "PATCH",
-       headers: {
-         "content-type": "application/json",
-       },
-       body: JSON.stringify(reviews),
-     })
-       .then((res) => res.json())
-       .then((data) => {
-         console.log(data);
-         if (data.modifiedCount > 0) {
-           toast.success("Updated Seccess");
-         }
-       });
+    fetch(`https://echo-book-server.vercel.app/updateAboute/${aboutinfo._id}`, {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(reviews),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.modifiedCount > 0) {
+          toast.success("Updated Seccess");
+        }
+      });
   };
 
   const handlerInputChange = (e) => {
